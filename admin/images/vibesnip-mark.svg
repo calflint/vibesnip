@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="VibeSnip">
+	<defs>
+		<!-- userSpaceOnUse so one gradient spans the whole mark; the default
+		     objectBoundingBox would restart the ramp inside every shape. -->
+		<linearGradient id="vs-mark-g" gradientUnits="userSpaceOnUse" x1="8" y1="0" x2="60" y2="0">
+			<stop offset="0" stop-color="#F97316"/>
+			<stop offset="0.42" stop-color="#FB923C"/>
+			<stop offset="0.60" stop-color="#7CC5EA"/>
+			<stop offset="1" stop-color="#0EA5E9"/>
+		</linearGradient>
+	</defs>
+	<g fill="none" stroke="url(#vs-mark-g)" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M 51.66 18.23 A 24 24 0 1 0 50.39 47.43" stroke-width="4.2"/>
+		<path d="M 23 25 L 16.5 32 L 23 39" stroke-width="4.2"/>
+		<path d="M 31 23 L 26 41" stroke-width="4.2"/>
+		<path d="M 35 25 L 42 32 L 35 39" stroke-width="4.2"/>
+		<!-- Three peaks, not seven: the pulse has ~18 units of width to live in,
+		     and anything denser reads as a smudge below about 96px. -->
+		<path d="M 42 32 L 44 32 L 47 23 L 50.5 41 L 54 26 L 57 32 L 60 32" stroke-width="3"/>
+	</g>
+	<path d="M 56.18 40.54 L 54.22 50.65 L 46.56 44.21 Z" fill="url(#vs-mark-g)"/>
+</svg>

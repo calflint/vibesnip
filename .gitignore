@@ -1,0 +1,32 @@
+# Internal planning and process documents live in the private working repo and
+# must never land here. Listed by name so a stray `git add -A` cannot pull one in.
+CLAUDE.md
+AGENTS.md
+SUBMISSION.md
+MONETIZATION.md
+PLAN.md
+PLAN-*.md
+IDEA-LIBRARY.md
+LEDGER.md
+PROGRESS.md
+NOTES.md
+TODO.md
+
+# Tooling state
+.codegraph/
+.impeccable/
+.claude/
+
+# Secrets — nothing here has ever held one, and nothing should start
+.env
+.env.*
+*.pem
+*.key
+
+# Build output
+*.zip
+*.log
+
+# OS noise
+.DS_Store
+Thumbs.db

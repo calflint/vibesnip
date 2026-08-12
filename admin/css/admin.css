@@ -1,0 +1,301 @@
+/* VibeSnip admin styles */
+.vibesnip-wrap { --vs-accent:#c8791b; --vs-ink:#1b1e24; --vs-good:#1a7f37; --vs-bad:#c4341f;
+	/* One assigned colour per language, shared by badges + the editor heading.
+	   PHP (violet) and CSS (teal) are deliberately far apart on the wheel — they
+	   were both blues before and were hard to tell apart at badge size. */
+	--lang-php:#7c3aed; --lang-css:#0f766e; --lang-js:#9a7a12; --lang-html:#c0562f; --lang-text:#5a626c; }
+.vibesnip-tagline { color:#646970; font-size:13px; margin:4px 0 14px; max-width:70ch; }
+
+/* Logo in page headings. Kept as an inline child of the h1 rather than a flex
+   wrapper so `wp-heading-inline` + the "Add Snippet" page-title-action still
+   sit on the same line as the title. */
+.vibesnip-wrap h1 .vibesnip-logo { width:28px; height:28px; vertical-align:-6px; margin-right:9px; }
+/* 80px, not smaller: below roughly 64 the pulse line collapses into a smudge. */
+.vibesnip-wrap .vibesnip-hero-mark { display:block; width:80px; height:80px; margin:6px 0 2px; }
+
+/* language badges */
+.vs-lang { font:600 10.5px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; letter-spacing:.03em;
+	padding:3px 7px; border-radius:5px; display:inline-block; border:1px solid transparent; }
+.vs-lang-php  { color:#7c3aed; background:#7c3aed14; border-color:#7c3aed3a; }
+.vs-lang-css  { color:#0f766e; background:#0f766e14; border-color:#0f766e3a; }
+.vs-lang-js   { color:#9a7a12; background:#c79a1f14; border-color:#c79a1f3a; }
+.vs-lang-html { color:#c0562f; background:#c0562f14; border-color:#c0562f3a; }
+.vs-lang-text { color:#5a626c; background:#5a626c14; border-color:#5a626c3a; }
+
+/* toggle */
+.vs-toggle { display:inline-block; width:38px; height:21px; border-radius:100px; background:#c3c4c7;
+	position:relative; transition:background .15s; text-decoration:none; vertical-align:middle; }
+.vs-toggle .vs-knob { position:absolute; top:2px; left:2px; width:17px; height:17px; border-radius:50%;
+	background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.25); transition:left .15s; }
+.vs-toggle.on { background:var(--vs-good); }
+.vs-toggle.on .vs-knob { left:19px; }
+.vs-toggle.err { background:var(--vs-bad); }
+.vs-toggle.err .vs-knob { left:2px; }
+.vs-toggle:focus { outline:2px solid var(--vs-accent); outline-offset:2px; }
+
+.vs-inline-err { color:var(--vs-bad); font-size:12px; margin-top:3px; }
+.vs-tag { display:inline-block; font-size:11px; background:#f0f0f1; color:#50575e; padding:1px 7px; border-radius:100px; }
+.vs-muted { color:#a7aaad; }
+.vs-chip { display:inline-block; font-size:11px; padding:1px 7px; border-radius:100px; }
+.vs-chip.vs-source { background:#eee7d6; color:#8a5d00; text-transform:uppercase; letter-spacing:.03em; font-weight:600; }
+.vs-chip.vs-ai { background:#ece3fb; color:#6d3fd0; }
+.vs-chip.vs-user { background:#e7eef7; color:#2c5e8a; }
+
+/* status pills */
+.vs-status { font:600 11px/1 ui-monospace,Menlo,monospace; padding:3px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:.04em; }
+.vs-status.vs-active   { background:#ddf0e1; color:var(--vs-good); }
+.vs-status.vs-inactive { background:#eceef0; color:#646970; }
+.vs-status.vs-error    { background:#f7e0db; color:var(--vs-bad); }
+.vs-status.vs-draft    { background:#eef1f4; color:#50575e; }
+.vs-result { font:600 11px/1 ui-monospace,Menlo,monospace; text-transform:uppercase; }
+.vs-result.vs-ok { color:var(--vs-good); }
+.vs-result.vs-error { color:var(--vs-bad); }
+.vs-result.vs-warning { color:#8a5d00; }
+
+/* editor layout */
+.vibesnip-editor .vibesnip-grid { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:22px; margin-top:16px; align-items:start; }
+@media (max-width:960px){ .vibesnip-editor .vibesnip-grid { grid-template-columns:1fr; } }
+
+.vibesnip-title-input { width:100%; font-size:20px; padding:10px 12px; margin-bottom:14px; border:1px solid #dcdcde; border-radius:7px; }
+.vibesnip-title-input:focus { border-color:var(--vs-accent); box-shadow:0 0 0 1px var(--vs-accent); outline:none; }
+
+.vibesnip-editor-shell { border:1px solid #d5d0c4; border-radius:9px; overflow:hidden; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+.vibesnip-editor-bar { display:flex; align-items:center; gap:12px; padding:8px 16px; min-height:36px; background:#faf7f0; border-bottom:1px solid #ece7db; --lang:#8a8f98; }
+/* the active language colour drives the dot, filename and pill together */
+.vibesnip-editor-bar.lang-php  { --lang:var(--lang-php); }
+.vibesnip-editor-bar.lang-css  { --lang:var(--lang-css); }
+.vibesnip-editor-bar.lang-js   { --lang:var(--lang-js); }
+.vibesnip-editor-bar.lang-html { --lang:var(--lang-html); }
+.vibesnip-editor-bar.lang-text { --lang:var(--lang-text); }
+.vs-lang-dot { width:13px; height:13px; border-radius:50%; background:var(--lang); box-shadow:0 0 0 3px color-mix(in srgb, var(--lang) 16%, transparent); transition:background .18s ease, box-shadow .18s ease; }
+.vs-editor-name { font:600 14px/1 ui-monospace,Menlo,Consolas,monospace; color:var(--lang); transition:color .18s ease; }
+.vs-lang-pill { font:700 11px/1 ui-monospace,Menlo,monospace; letter-spacing:.06em; color:var(--lang);
+	border:1px solid color-mix(in srgb, var(--lang) 40%, transparent); background:color-mix(in srgb, var(--lang) 10%, transparent);
+	padding:4px 9px; border-radius:5px; transition:color .18s ease, border-color .18s ease, background .18s ease; }
+
+/* Ask AI is the only action in the heading bar, so it owns the right edge. The
+   wrapper carries the tooltip: a disabled button fires no hover events. */
+.vs-ask-wrap { margin-left:auto; display:inline-flex; }
+.vs-ask-btn { font:600 14px/1 ui-monospace,Menlo,monospace; cursor:pointer;
+	background:transparent; border:1px solid color-mix(in srgb, var(--lang) 40%, transparent); border-radius:6px;
+	padding:5px 12px; color:var(--lang); transition:background .15s ease, border-color .15s ease; }
+.vs-ask-btn:hover:not(:disabled) { background:color-mix(in srgb, var(--lang) 10%, transparent); border-color:var(--lang); }
+.vibesnip-code { width:100%; min-height:340px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; border:0; }
+.vibesnip-editor-shell .CodeMirror { height:auto; min-height:340px; font-size:13px; }
+
+.vibesnip-hint { color:#8a8f98; font-size:12px; margin:8px 2px 4px; min-height:1em; }
+.vibesnip-field-label { display:block; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:#50575e; margin:14px 0 5px; }
+.vibesnip-main .vibesnip-field-label:first-child { margin-top:18px; }
+
+/* side panels */
+.vibesnip-panel { background:#fff; border:1px solid #dcdcde; border-radius:9px; padding:15px 16px; margin-bottom:16px; }
+.vibesnip-panel h2 { font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:#646970; margin:0 0 12px; padding:0; }
+.vibesnip-panel .vibesnip-field-label:first-of-type { margin-top:0; }
+.vibesnip-status-line { font-size:13px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.vibesnip-save-buttons { display:flex; gap:8px; flex-wrap:wrap; }
+.vibesnip-microcopy { color:#8a8f98; font-size:12px; margin:8px 0 0; }
+.vibesnip-panel input.small-text { width:70px; }
+
+.vibesnip-revisions { margin:0; }
+.vibesnip-revisions li { display:flex; justify-content:space-between; gap:10px; padding:6px 0; border-bottom:1px solid #f0f0f1; font-size:12px; }
+.vibesnip-revisions li:last-child { border-bottom:0; }
+.vs-rev-msg { color:#1b1e24; } .vs-rev-time { color:#a7aaad; font-family:ui-monospace,Menlo,monospace; white-space:nowrap; }
+
+/* activity log */
+.vibesnip-log code { font-size:12px; }
+.vibesnip-log td { vertical-align:middle; }
+
+/* library page */
+.vibesnip-lib-cat { font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:#646970; margin:26px 0 10px; padding-bottom:6px; border-bottom:1px solid #e4dfd3; }
+.vibesnip-lib-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+.vibesnip-lib-card { display:flex; flex-direction:column; background:#fff; border:1px solid #dcdcde; border-radius:9px; padding:15px 16px; }
+.vibesnip-lib-head { display:flex; align-items:center; gap:9px; margin-bottom:7px; }
+.vibesnip-lib-head h3 { margin:0; font-size:15px; line-height:1.3; }
+.vibesnip-lib-desc { color:#646970; font-size:13px; line-height:1.5; margin:0 0 14px; flex:1; }
+.vibesnip-lib-foot { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.vibesnip-lib-foot .vs-muted { font-size:12px; }
+
+/* conditional logic builder */
+.vibesnip-conditions { margin-top:18px; border-top:1px solid #e4dfd3; padding-top:14px; }
+.vibesnip-cond-enable { display:flex; align-items:center; gap:8px; font-weight:600; font-size:13px; cursor:pointer; }
+.vibesnip-cond-body { margin-top:12px; }
+.vibesnip-cond-relation { display:flex; align-items:center; gap:8px; font-size:13px; color:#50575e; margin:0 0 10px; }
+.vibesnip-cond-rules { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+.vibesnip-cond-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:#fbfaf6; border:1px solid #e6e1d5; border-radius:7px; padding:8px 10px; }
+.vibesnip-cond-row select, .vibesnip-cond-row input { margin:0; }
+.vibesnip-cond-row .vs-cond-op, .vibesnip-cond-row .vs-cond-val { display:inline-flex; }
+.vs-cond-value-text { min-width:150px; }
+.vs-cond-remove { color:#c4341f; text-decoration:none; font-size:18px; line-height:1; margin-left:auto; padding:0 4px; }
+.vs-cond-remove:hover { color:#a02414; }
+
+/* settings: the AI opt-in. Deliberately a bordered block rather than one more
+   checkbox in the table — switching on code generation against a live site is
+   not the same kind of decision as picking a sort order, and should not look
+   like one. */
+.vibesnip-section-h { font-size:14px; text-transform:uppercase; letter-spacing:.05em; color:#646970;
+	margin:26px 0 10px; padding-bottom:6px; border-bottom:1px solid #e4dfd3; max-width:80ch; }
+.vibesnip-ai-gate { max-width:80ch; background:#fff; border:1px solid #dcdcde; border-radius:9px; padding:16px 18px; }
+.vibesnip-ai-gate.is-on { border-color:#1a7f3733; background:#fbfdfb; }
+.vibesnip-gate-lead { font-size:13.5px; line-height:1.6; color:#50575e; margin:0 0 14px; }
+.vibesnip-gate-risks { background:#fbf7ef; border:1px solid #e5d9c2; border-radius:7px; padding:12px 16px; margin:0 0 14px; }
+.vibesnip-gate-risks h3 { margin:0 0 8px; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:#8a5d00; }
+.vibesnip-gate-risks ul { margin:0; padding-left:18px; list-style:disc; }
+.vibesnip-gate-risks li { font-size:13px; line-height:1.55; color:#50575e; margin:0 0 6px; }
+.vibesnip-gate-risks li:last-child { margin-bottom:0; }
+.vibesnip-gate-choice { font-size:13.5px; margin:0 0 8px; }
+.vibesnip-gate-choice label { display:flex; align-items:flex-start; gap:8px; cursor:pointer; }
+.vibesnip-gate-choice input { margin:2px 0 0; flex:none; }
+
+/* settings: provider block + connection test */
+.vibesnip-advanced { margin-top:10px; }
+.vibesnip-advanced summary { cursor:pointer; font-size:12.5px; color:#646970; }
+.vibesnip-advanced summary:hover { color:var(--vs-accent); }
+.vibesnip-advanced .description { max-width:70ch; }
+.vibesnip-test-result,
+.vibesnip-models-result { margin-left:10px; font-size:13px; }
+.vibesnip-test-result.is-ok,
+.vibesnip-models-result.is-ok { color:var(--vs-good); }
+.vibesnip-test-result.is-bad,
+.vibesnip-models-result.is-bad { color:var(--vs-bad); }
+.vibesnip-refresh-models { margin-left:8px !important; vertical-align:baseline; }
+
+/* The API key box is a text input masked here rather than type="password", so no
+   browser or password manager offers to remember a spending credential. Same
+   look, none of the capture. */
+.vibesnip-key-input { -webkit-text-security:disc; text-security:disc;
+	font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; letter-spacing:.06em; }
+
+/* donation footer — deliberately quiet: a hairline rule and body text rather
+   than a coloured banner, so it reads as a footnote and never competes with
+   the screen it sits under. */
+.vibesnip-donate { max-width:70ch; margin:34px 0 8px; padding-top:16px; border-top:1px solid #e4dfd3; }
+.vibesnip-donate-ask { font-size:13px; line-height:1.6; color:#50575e; margin:0 0 12px; }
+.vibesnip-donate-actions { display:flex; align-items:center; gap:14px; margin:0; }
+
+/* permissions matrix — the label is part of the hit target, so a cell is never
+   an unexplained bare checkbox. Ineligible cells say so in words: a lone dash
+   reads as a control that failed to render. */
+.vibesnip-perms td { vertical-align:middle; }
+.vibesnip-perms .vs-perm-box,
+.vibesnip-perms .vs-perm-locked { display:inline-flex; align-items:center; gap:7px; }
+.vibesnip-perms .vs-perm-box label { cursor:pointer; font-size:13px; }
+.vibesnip-perms .vs-perm-box input { margin:0; }
+.vibesnip-perms .vs-perm-locked { color:#646970; }
+.vibesnip-perms .vs-perm-locked input { margin:0; }
+.vibesnip-perms .vs-perm-locked label { font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+.vibesnip-perms .vs-perm-na { color:#8a8f98; font-size:12.5px; font-style:italic; }
+.vibesnip-perms-note { max-width:80ch; margin-top:18px; }
+.vibesnip-perms-note p { font-size:13px; line-height:1.55; margin:0 0 10px; }
+.vibesnip-perms-note p:last-child { margin-bottom:0; }
+
+/* import page */
+.vibesnip-import-card { max-width:540px; }
+.vibesnip-import-card input[type="file"] { display:block; margin:6px 0 4px; }
+
+/* AI compose */
+.vibesnip-compose-form { max-width:820px; margin:16px 0 8px; }
+.vibesnip-compose-input { width:100%; font-size:15px; padding:13px 15px; border:1px solid #d5d0c4; border-radius:10px; resize:vertical; }
+.vibesnip-compose-input:focus { border-color:#c8791b; box-shadow:0 0 0 1px #c8791b; outline:none; }
+.vibesnip-compose-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:10px; }
+/* AI Compose conversation. The thread reads top-down like a transcript: your
+   request, then what it understood, then what it wrote. Each turn is a card so
+   the boundary between "still deciding" and "already written" stays obvious. */
+.vibesnip-compose-thread { max-width:820px; }
+.vibesnip-compose-thread:empty { display:none; }
+.vibesnip-turn { background:#fff; border:1px solid #dcdcde; border-radius:11px; padding:16px 18px; margin:0 0 14px; }
+.vibesnip-turn-you { background:#faf7f0; border-color:#e6e1d5; }
+.vibesnip-turn-who { display:block; font:600 11px/1 ui-monospace,Menlo,monospace; text-transform:uppercase;
+	letter-spacing:.06em; color:#8a5d00; margin-bottom:7px; }
+.vibesnip-turn-body { font-size:14px; line-height:1.55; color:var(--vs-ink); margin:0; white-space:pre-wrap; }
+.vibesnip-turn p { font-size:13px; line-height:1.55; margin:0; }
+.vibesnip-turn .vibesnip-review-h:first-child { margin-top:0; }
+.vibesnip-turn-actions { display:flex; gap:9px; flex-wrap:wrap; margin-top:16px; }
+
+.vibesnip-plan-list { margin:0; padding:0; list-style:none; }
+.vibesnip-plan-list li { display:flex; align-items:baseline; gap:9px; flex-wrap:wrap;
+	padding:8px 0; border-bottom:1px solid #f0f0f1; }
+.vibesnip-plan-list li:last-child { border-bottom:0; }
+.vibesnip-plan-title { font-size:13.5px; color:var(--vs-ink); }
+.vibesnip-plan-summary { font-size:12.5px; color:#646970; flex-basis:100%; }
+
+.vibesnip-built-head { display:flex; align-items:center; gap:10px; }
+.vibesnip-built-head h3 { margin:0; font-size:16px; }
+.vibesnip-built-meta { font-size:12px; color:#8a8f98; margin:6px 0 0; }
+.vibesnip-built-desc { color:#50575e; font-size:13.5px; line-height:1.55; margin:10px 0 0; }
+.vibesnip-built .vibesnip-proposal-code { margin:12px 0 4px; }
+.vibesnip-built-saved { display:flex; gap:8px; align-items:center; font-size:13px;
+	margin-top:16px; padding-top:14px; border-top:1px solid #f0f0f1; color:var(--vs-good); }
+
+.vibesnip-compose-error { color:var(--vs-bad); font-size:13px; margin:0 0 14px; }
+.vibesnip-compose-hint { color:#8a8f98; font-size:12.5px; margin:0 0 14px; }
+
+/* Waiting state. The AI takes tens of seconds, and a screen with nothing on it
+   is indistinguishable from one that has failed — so the wait gets a card of its
+   own in the thread, with the clock running. */
+.vibesnip-pending { display:flex; align-items:center; gap:11px; }
+.vibesnip-pending-label { font-size:13.5px; color:#50575e; }
+.vibesnip-pending-clock { font:12px/1 ui-monospace,Menlo,Consolas,monospace; color:#8a8f98; margin-left:auto; }
+
+.vs-spinner { display:inline-block; width:15px; height:15px; flex:none; vertical-align:-2px;
+	border:2px solid currentColor; border-right-color:transparent; border-radius:50%; opacity:.6;
+	animation:vs-spin .7s linear infinite; }
+.vibesnip-pending .vs-spinner { color:var(--vs-accent); opacity:1; }
+@keyframes vs-spin { to { transform:rotate(360deg); } }
+/* Reduced motion still needs a "something is happening" signal, so it pulses
+   rather than stopping dead. */
+@media (prefers-reduced-motion:reduce) {
+	.vs-spinner { animation:vs-pulse 1.4s ease-in-out infinite; }
+	@keyframes vs-pulse { 0%,100% { opacity:.25; } 50% { opacity:1; } }
+}
+
+.vibesnip-proposal { max-width:820px; background:#fff; border:1px solid #dcdcde; border-radius:11px; padding:16px 18px; margin:0 0 14px; }
+.vibesnip-proposal-head { display:flex; align-items:center; gap:10px; }
+.vibesnip-proposal-head h3 { margin:0; font-size:16px; flex:1; }
+.vibesnip-proposal-desc { color:#50575e; font-size:13.5px; line-height:1.55; margin:10px 0; }
+.vibesnip-proposal-code { background:#0e1117; color:#e7eaee; border-radius:8px; padding:14px 15px; overflow-x:auto;
+	font:12.5px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; margin:8px 0 12px; white-space:pre; }
+.vibesnip-proposal-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.vs-chip.vs-ai .dot { display:inline-block; width:7px; height:7px; border-radius:50%; background:currentColor; margin-right:4px; }
+
+/* ask ai — review report */
+.vs-ask-btn:disabled { opacity:.45; cursor:default; }
+.vibesnip-nudge { font-size:12.5px; color:#50575e; background:#fbf7ef; border:1px solid #e5d9c2;
+	border-radius:7px; padding:9px 13px; margin:2px 2px 14px; max-width:80ch; }
+.vibesnip-review-error { color:var(--vs-bad); font-size:12.5px; margin:2px 2px 14px; }
+
+/* The verdict is carried by the chip in the header — the panel itself stays the
+   same plain card as every other panel. */
+.vibesnip-review-panel { margin:2px 2px 16px; max-width:80ch; }
+
+.vibesnip-review-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+.vs-verdict-chip { font:600 11px/1 ui-monospace,Menlo,monospace; padding:4px 9px; border-radius:100px;
+	text-transform:uppercase; letter-spacing:.04em; }
+.vs-verdict-chip.vs-verdict-safe    { background:#ddf0e1; color:var(--vs-good); }
+.vs-verdict-chip.vs-verdict-caution { background:#f7efdd; color:#8a5d00; }
+.vs-verdict-chip.vs-verdict-unsafe  { background:#f7e0db; color:var(--vs-bad); }
+.vibesnip-review-advisory { font-size:11.5px; color:#8a8f98; }
+
+.vibesnip-review-summary { font-size:14px; line-height:1.55; color:var(--vs-ink); margin:0 0 10px; }
+.vibesnip-review-h { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:#646970;
+	margin:14px 0 4px; padding:0; }
+.vibesnip-review-panel p { font-size:13px; line-height:1.55; margin:0; }
+.vibesnip-review-risks { margin:0; padding-left:18px; list-style:disc; }
+.vibesnip-review-risks li { font-size:13px; line-height:1.5; margin:0 0 3px; }
+
+.vibesnip-review-chips { display:flex; gap:7px; flex-wrap:wrap; }
+.vs-apply-chip { font-size:12px; background:#f6f7f7; border:1px solid #dcdcde; border-radius:100px;
+	padding:4px 11px; cursor:pointer; color:#2c3338; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.vs-apply-chip:hover { background:#fff; border-color:var(--vs-accent); color:var(--vs-accent); }
+.vs-apply-chip.is-applied { background:#ddf0e1; border-color:#1a7f3733; color:var(--vs-good); cursor:default; }
+
+/* verdict chip in the list table */
+.vs-chip.vs-verdict-safe    { background:#ddf0e1; color:#1a7f37; }
+.vs-chip.vs-verdict-caution { background:#f7efdd; color:#8a5d00; }
+.vs-chip.vs-verdict-unsafe  { background:#f7e0db; color:#c4341f; }
+
+/* No prefers-color-scheme rules anywhere in this file, deliberately. wp-admin
+   does not follow the OS setting — its own background stays light whatever the
+   system is set to — so darkening our panels for it produced dark cards full of
+   near-black text sitting on a light page, which is exactly as unreadable as it
+   sounds. VibeSnip follows wp-admin instead. If WordPress ships a real admin
+   dark mode, theme against that, not against the OS. */

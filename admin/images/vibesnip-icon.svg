@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="20" height="20" role="img" aria-label="VibeSnip">
+	<defs>
+		<!-- Simplified sibling of vibesnip-mark.svg: the waveform is dropped and the
+		     glyph enlarged, because at the 20px WordPress renders a menu icon the
+		     fine detail collapses into noise. userSpaceOnUse keeps one gradient
+		     ramp across the whole mark instead of restarting it per shape.
+
+		     The 20px intrinsic size is load-bearing: a non-dashicon, non-data-URI
+		     menu icon is emitted as a bare <img> and core's #adminmenu rule sets
+		     only padding and opacity on it, so whatever width/height this file
+		     declares is the size in the sidebar. Anything larger than 20 blows
+		     out the admin menu; consumers that want it bigger pass their own
+		     width/height (see VibeSnip_Brand::heading_logo). -->
+		<linearGradient id="vs-menu-g" gradientUnits="userSpaceOnUse" x1="8" y1="0" x2="58" y2="0">
+			<stop offset="0" stop-color="#F97316"/>
+			<stop offset="0.44" stop-color="#FB923C"/>
+			<stop offset="0.62" stop-color="#7CC5EA"/>
+			<stop offset="1" stop-color="#0EA5E9"/>
+		</linearGradient>
+	</defs>
+	<g fill="none" stroke="url(#vs-menu-g)" stroke-linecap="round" stroke-linejoin="round">
+		<path d="M 51.66 18.23 A 24 24 0 1 0 50.39 47.43" stroke-width="5"/>
+		<path d="M 24.5 23 L 15.5 32 L 24.5 41" stroke-width="5.6"/>
+		<path d="M 37 21 L 29 43" stroke-width="5.6"/>
+		<path d="M 41.5 23 L 50.5 32 L 41.5 41" stroke-width="5.6"/>
+	</g>
+	<path d="M 56.18 40.54 L 54.22 50.65 L 46.56 44.21 Z" fill="url(#vs-menu-g)"/>
+</svg>

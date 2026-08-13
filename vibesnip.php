@@ -86,6 +86,12 @@ final class VibeSnip {
 			// is reconciled here instead. No-ops unless the version changed.
 			add_action( 'admin_init', array( 'VibeSnip_Activator', 'maybe_upgrade' ) );
 
+			// VibeSnip ships from GitHub Releases, not wordpress.org, so it has
+			// to supply its own update channel or "Check for updates" is a dead
+			// end forever.
+			require_once VIBESNIP_DIR . 'includes/class-vibesnip-updater.php';
+			VibeSnip_Updater::init();
+
 			require_once VIBESNIP_DIR . 'admin/class-vibesnip-brand.php';
 			require_once VIBESNIP_DIR . 'admin/class-vibesnip-admin.php';
 			$this->admin = new VibeSnip_Admin();

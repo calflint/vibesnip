@@ -1139,7 +1139,7 @@ class VibeSnip_Admin {
 							<p class="description"><?php esc_html_e( 'VibeSnip is fully functional without any paid add-on. Tick this and it will stop mentioning them.', 'vibesnip' ); ?></p>
 							<label><input type="checkbox" name="hide_donate" <?php checked( $prefs['hide_donate'] ); ?> />
 								<?php esc_html_e( 'Hide the donation footer.', 'vibesnip' ); ?></label>
-							<p class="description"><?php esc_html_e( 'Removes the “Donate via PayPal” block from the bottom of every VibeSnip screen. Donating is entirely optional and nothing in the plugin is withheld either way.', 'vibesnip' ); ?></p>
+							<p class="description"><?php esc_html_e( 'Removes the “Donate” block from the bottom of every VibeSnip screen. Donating is entirely optional and nothing in the plugin is withheld either way.', 'vibesnip' ); ?></p>
 						</td>
 					</tr>
 					<tr>

@@ -172,6 +172,7 @@
 .vibesnip-donate-ask { font-size:13px; line-height:1.6; color:#50575e; margin:0 0 12px; }
 .vibesnip-donate-actions { display:flex; align-items:center; gap:14px; margin:0; }
 
+
 /* permissions matrix — the label is part of the hit target, so a cell is never
    an unexplained bare checkbox. Ineligible cells say so in words: a lone dash
    reads as a control that failed to render. */

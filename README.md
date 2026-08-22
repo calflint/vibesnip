@@ -7,6 +7,7 @@ Every snippets plugin stores code. The thing VibeSnip is actually built around i
 - **Free and GPL-2.0-or-later.** No paywalled features in this repository.
 - **No build step, no bundled dependencies.** It is a plain WordPress plugin — clone it into `wp-content/plugins/` and activate.
 - **Bring your own AI key, or don't.** AI is off until you turn it on, and the plugin contacts nobody until you do.
+- **Donation-funded, not sold.** There is no paid tier and none is planned. See [ROADMAP.md](ROADMAP.md) for where the project is going and how to help.
 
 ## Safety model
 
@@ -127,6 +128,8 @@ Third parties can register one without patching core, via the `vibesnip_ai_provi
 | Add a settings field | `render_settings_general()` + `handle_settings()` in `class-vibesnip-admin.php` |
 
 ## Contributing
+
+**[ROADMAP.md](ROADMAP.md) is the place to start** — it sets out what is built, what is missing, what will never be merged, and a short list of good first tasks.
 
 Issues and pull requests are welcome. Two things that will not be merged, so it is fairer to say them up front:
 

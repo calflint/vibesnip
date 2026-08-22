@@ -1,11 +1,11 @@
 === VibeSnip ===
 Contributors: calflint2030
 Tags: code snippets, php, css, custom code, functions.php
-Donate link: https://www.paypal.com/ncp/payment/N5XNPLY724KPC
+Donate link: https://ko-fi.com/N4S525E796
 Requires at least: 6.9
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 0.12.0
+Stable tag: 0.12.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,8 @@ Every outbound HTTP request the plugin can make is listed under "External servic
 
 VibeSnip's core — snippet storage, execution, validation, the health-check, revisions, the audit log and Safe Mode — runs entirely on your own server and contacts no external service.
 
+**Ko-fi (the Donate button).** VibeSnip's admin screens end with an optional donation footer, and the button in it is Ko-fi's own widget, loaded from `storage.ko-fi.com`. Your browser fetches that script when a VibeSnip admin page loads, which tells Ko-fi your IP address and the usual details any web request carries. Nothing about your site, your snippets or your visitors is sent, and it never runs on the front end — only on VibeSnip's own admin pages, and only for a user who can manage snippets. Switch the footer off under Settings → General and the script is not loaded at all. Ko-fi's terms: https://more.ko-fi.com/tos — privacy policy: https://more.ko-fi.com/privacy
+
 VibeSnip has two optional AI features, **both switched off on a new install**: **AI Compose**, which turns a plain-English request into a snippet proposal, and **Ask AI**, which reviews a snippet you have written or pasted and reports what it does and how safe it is.
 
 Three separate things must happen before VibeSnip contacts anyone: you must switch AI features on under Settings → General and accept the stated risks, you must add your own API key for a provider you choose, and you must click the button. Until all three, no request leaves your site. Nothing either feature returns is ever activated automatically.
@@ -175,6 +177,10 @@ Anthropic, OpenAI and Google each have an optional **Advanced: custom endpoint**
 If you enter an address there, **all of the data described above is sent to that host instead of to the provider**, and it is governed by that host's terms and privacy policy rather than the provider's. VibeSnip cannot know in advance which host you will enter, so you are responsible for reviewing the terms of whatever service you point it at.
 
 == Changelog ==
+
+= 0.12.1 =
+* Changed: the donation footer is now a **Ko-fi** button rather than a PayPal link. It is Ko-fi's own button, so a VibeSnip admin page now loads a small script from Ko-fi — written up under "External services" below. It is still optional, still admin-only, still never on the front end, and switching the footer off under Settings → General stops the script loading at all.
+* Fixed: **saving a snippet could wipe the rest of it.** When a save sent only part of a snippet — as the Abilities API and some edit paths do — every field it did not send was written back empty. The name, description, tags and notes were cleared, the position and priority reset, and worst of all an **active snippet quietly switched itself off**. A save now changes only what you actually changed and leaves everything else exactly as it was.
 
 = 0.12.0 =
 * New: **AI is off until you turn it on.** VibeSnip now installs as an ordinary snippets plugin — no AI menu, no AI buttons, no key field, and no contact with anyone. Switching AI on is a deliberate step under Settings → General that first sets out what it does, what is sent where, who pays for it and what can go wrong, and asks you to accept that. Sites already using AI keep it on and are not asked again.

@@ -3,7 +3,7 @@
  * Plugin Name:       VibeSnip
  * Plugin URI:        https://github.com/calflint/VibeSnip
  * Description:        AI-native code snippets for WordPress. Add PHP, CSS, JS, HTML and text snippets safely — with syntax validation, auto-deactivate on fatal error, revisions, an audit log, and Safe Mode recovery. You stay in control: every change is admin-approved and reversible.
- * Version:           0.12.0
+ * Version:           0.12.1
  * Requires at least: 6.9
  * Requires PHP:      7.0
  * Author:            Caleb Arthur-Flints
@@ -18,7 +18,7 @@
 // No direct access.
 defined( 'ABSPATH' ) || exit;
 
-define( 'VIBESNIP_VERSION', '0.12.0' );
+define( 'VIBESNIP_VERSION', '0.12.1' );
 define( 'VIBESNIP_FILE', __FILE__ );
 define( 'VIBESNIP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'VIBESNIP_URL', plugin_dir_url( __FILE__ ) );

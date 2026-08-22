@@ -86,14 +86,47 @@ class VibeSnip_Snippets {
 	/**
 	 * Update a snippet and record a revision.
 	 *
+	 * Partial input is supported: sanitize() writes a fixed column list, so any
+	 * column the caller omitted would otherwise be written back as its default
+	 * and silently blank the stored value (a code-only save would wipe the
+	 * title, tags and status). The current row is merged in first so an omitted
+	 * key means "leave it alone".
+	 *
 	 * @param int   $id   Snippet ID.
-	 * @param array $data Input.
+	 * @param array $data Input; may contain only the columns being changed.
 	 * @return bool
 	 */
 	public function update( $id, $data ) {
 		global $wpdb;
-		$id     = (int) $id;
-		$fields = $this->sanitize( $data );
+		$id = (int) $id;
+
+		$current = $this->get( $id );
+		if ( ! $current ) {
+			return false;
+		}
+
+		$existing = array(
+			'title'       => $current->title,
+			'description' => $current->description,
+			'code'        => $current->code,
+			'type'        => $current->type,
+			'location'    => $current->location,
+			'priority'    => $current->priority,
+			'status'      => $current->status,
+			'tags'        => $current->tags,
+			'source'      => $current->source,
+			'ai_prompt'   => $current->ai_prompt,
+			'ai_model'    => $current->ai_model,
+		);
+
+		// Stored decoded: sanitize() re-encodes, and feeding it the stored JSON
+		// string would wrap it in quotes again on every save. Left out entirely
+		// when empty so an unconditioned snippet keeps an empty column.
+		if ( '' !== $current->conditions && null !== $current->conditions ) {
+			$existing['conditions'] = json_decode( $current->conditions, true );
+		}
+
+		$fields               = $this->sanitize( array_merge( $existing, $data ) );
 		$fields['updated_at'] = current_time( 'mysql' );
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- custom plugin table; no core API covers it, and snippet state must never be served stale so it is deliberately uncached.

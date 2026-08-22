@@ -1,0 +1,15 @@
+/.git
+/.gitignore
+/.distignore
+/.codegraph
+/.impeccable
+.env
+.env.*
+/CLAUDE.md
+/README.md
+/ROADMAP.md
+/tests
+.DS_Store
+Thumbs.db
+*.log
+*.zip
